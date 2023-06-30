@@ -7,7 +7,7 @@ const LeftPage: React.FC = () => {
   const level3Breakpoint = 90.0;
   const waterStatus = waterLevel >= level3Breakpoint ? "dangerous" : waterLevel >= level2Breakpoint ? "be warned" : waterLevel >= level1Breakpoint ? "safe" : "low";
   return (
-    <div className="relative flex h-[75vh] w-[50vw] flex-col justify-end rounded-b-xl border-4 border-foreground border-t-transparent md:w-[20vw]">
+    <div className="relative flex h-[75vh] w-[75vw] flex-col justify-end rounded-b-xl border-4 border-foreground border-t-transparent md:w-[30vw]">
       <svg
         className={`relative w-full ${waterLevel <= 5 && "rounded-b-lg"}`}
         style={{ height: `${waterLevel <= 5 ? waterLevel : 5}%` }}
