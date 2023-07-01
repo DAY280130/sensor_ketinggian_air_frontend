@@ -20,27 +20,39 @@ type DepthMonitorDatas = z.infer<typeof depthMonitorSchema>;
 const sonarMonitorSchema = dataSchema.pick({ sonarStatus: true });
 type SonarMonitorDatas = z.infer<typeof sonarMonitorSchema>;
 
+const levelBreakpointSchema = dataSchema.pick({
+  level1Breakpoint: true,
+  level2Breakpoint: true,
+  level3Breakpoint: true,
+});
+type LevelBreakpoints = z.infer<typeof levelBreakpointSchema>;
+
 const RightPage: React.FC = () => {
   const apiBaseUrl = useReadLocalStorage("api-url");
-  const { data } = useQuery<DepthMonitorDatas & SonarMonitorDatas>({
+  const { data } = useQuery<DepthMonitorDatas & SonarMonitorDatas & LevelBreakpoints>({
     queryKey: ["right-page"],
     queryFn: async () => {
       const depthMonitorDatas = (await axios.get<DepthMonitorDatas>(`${apiBaseUrl}/depth`)).data;
 
       const sonarMonitorDatas = (await axios.get<SonarMonitorDatas>(`${apiBaseUrl}/sonar`)).data;
 
-      return { ...depthMonitorDatas, ...sonarMonitorDatas };
+      const levelBreakpoints = (await axios.get<LevelBreakpoints>(`${apiBaseUrl}/level`)).data;
+
+      return { ...depthMonitorDatas, ...sonarMonitorDatas, ...levelBreakpoints };
     },
     initialData: {
       sonarStatus: "inactive",
       depthStatus: "unchecked",
       depth: 0,
+      level1Breakpoint: 0,
+      level2Breakpoint: 0,
+      level3Breakpoint: 0,
     },
     refetchIntervalInBackground: true,
     refetchInterval: 1000,
   });
 
-  const { sonarStatus, depth, depthStatus } = data;
+  const { sonarStatus, depth, depthStatus, level1Breakpoint, level2Breakpoint, level3Breakpoint } = data;
 
   const [depthButtonIsLoading, setDepthButtonIsLoading] = React.useState(false);
   const [sonarButtonIsLoading, setSonarButtonIsLoading] = React.useState(false);
@@ -85,7 +97,7 @@ const RightPage: React.FC = () => {
         </Button>
       </span>
       {/* <span className="w-full gap-3 rounded-md bg-accent px-3 py-2 font-semibold"></span> */}
-      <Tabs defaultValue="account" className="w-full">
+      <Tabs defaultValue="level1" className="w-full">
         <TabsList className="mb-2 flex w-full rounded-md bg-accent px-3 py-2">
           <TabsTrigger value="level1" className="grow">
             Safe
@@ -101,7 +113,7 @@ const RightPage: React.FC = () => {
           <Label htmlFor="level-1-input" className="text-right">
             Safe Water Level Percentage
           </Label>
-          <Input id="level-1-input" type="number" min={0} max={100} placeholder="50" />
+          <Input id="level-1-input" type="number" min={0} max={100} placeholder={level1Breakpoint.toString()} />
           <Button
             type="button"
             onClick={() => {
@@ -119,7 +131,7 @@ const RightPage: React.FC = () => {
           <Label htmlFor="level-2-input" className="text-right">
             Be Warned Water Level Percentage
           </Label>
-          <Input id="level-2-input" type="number" min={0} max={100} placeholder="75" />
+          <Input id="level-2-input" type="number" min={0} max={100} placeholder={level2Breakpoint.toString()} />
           <Button
             type="button"
             onClick={() => {
@@ -137,7 +149,7 @@ const RightPage: React.FC = () => {
           <Label htmlFor="level-3-input" className="text-right">
             Dangerous Water Level Percentage
           </Label>
-          <Input id="level-3-input" type="number" min={0} max={100} placeholder="90" />
+          <Input id="level-3-input" type="number" min={0} max={100} placeholder={level3Breakpoint.toString()} />
           <Button
             type="button"
             onClick={() => {
