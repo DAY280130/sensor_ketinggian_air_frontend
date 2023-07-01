@@ -1,5 +1,8 @@
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { dataSchema } from "@/lib/schema";
 import { useQuery } from "@tanstack/react-query";
 import axios from "axios";
@@ -19,7 +22,7 @@ type SonarMonitorDatas = z.infer<typeof sonarMonitorSchema>;
 
 const RightPage: React.FC = () => {
   const apiBaseUrl = useReadLocalStorage("api-url");
-  const { data } = useQuery({
+  const { data } = useQuery<DepthMonitorDatas & SonarMonitorDatas>({
     queryKey: ["right-page"],
     queryFn: async () => {
       const depthMonitorDatas = (await axios.get<DepthMonitorDatas>(`${apiBaseUrl}/depth`)).data;
@@ -42,7 +45,7 @@ const RightPage: React.FC = () => {
   const [depthButtonIsLoading, setDepthButtonIsLoading] = React.useState(false);
   const [sonarButtonIsLoading, setSonarButtonIsLoading] = React.useState(false);
   return (
-    <div className="flex w-[30vw] flex-col gap-2">
+    <div className="flex w-[75vw] flex-col gap-2 md:w-[30vw]">
       <span className="flex w-full items-center justify-between rounded-md bg-accent px-3 py-2 font-semibold">
         <span>
           Depth :{" "}
@@ -81,6 +84,74 @@ const RightPage: React.FC = () => {
           {sonarButtonIsLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : sonarStatus === "active" ? "Deactivate" : "Activate"}
         </Button>
       </span>
+      {/* <span className="w-full gap-3 rounded-md bg-accent px-3 py-2 font-semibold"></span> */}
+      <Tabs defaultValue="account" className="w-full">
+        <TabsList className="mb-2 flex w-full rounded-md bg-accent px-3 py-2">
+          <TabsTrigger value="level1" className="grow">
+            Safe
+          </TabsTrigger>
+          <TabsTrigger value="level2" className="grow">
+            Warn
+          </TabsTrigger>
+          <TabsTrigger value="level3" className="grow">
+            Danger
+          </TabsTrigger>
+        </TabsList>
+        <TabsContent value="level1" className="m-0 flex w-full flex-col items-start gap-3 rounded-md bg-accent font-semibold data-[state=active]:px-3 data-[state=active]:py-2">
+          <Label htmlFor="level-1-input" className="text-right">
+            Safe Water Level Percentage
+          </Label>
+          <Input id="level-1-input" type="number" min={0} max={100} placeholder="50" />
+          <Button
+            type="button"
+            onClick={() => {
+              const input = document.getElementById("level-1-input") as HTMLInputElement;
+              const value = parseInt(input.value);
+              if (value >= 0 || value <= 100) {
+                axios.post(`${apiBaseUrl}/level/1`, { value });
+              }
+            }}
+          >
+            Save
+          </Button>
+        </TabsContent>
+        <TabsContent value="level2" className="m-0 flex w-full flex-col items-start gap-3 rounded-md bg-accent font-semibold data-[state=active]:px-3 data-[state=active]:py-2">
+          <Label htmlFor="level-2-input" className="text-right">
+            Be Warned Water Level Percentage
+          </Label>
+          <Input id="level-2-input" type="number" min={0} max={100} placeholder="75" />
+          <Button
+            type="button"
+            onClick={() => {
+              const input = document.getElementById("level-2-input") as HTMLInputElement;
+              const value = parseInt(input.value);
+              if (value >= 0 || value <= 100) {
+                axios.post(`${apiBaseUrl}/level/2`, { value });
+              }
+            }}
+          >
+            Save
+          </Button>
+        </TabsContent>
+        <TabsContent value="level3" className="m-0 flex w-full flex-col items-start gap-3 rounded-md bg-accent font-semibold data-[state=active]:px-3 data-[state=active]:py-2">
+          <Label htmlFor="level-3-input" className="text-right">
+            Dangerous Water Level Percentage
+          </Label>
+          <Input id="level-3-input" type="number" min={0} max={100} placeholder="90" />
+          <Button
+            type="button"
+            onClick={() => {
+              const input = document.getElementById("level-3-input") as HTMLInputElement;
+              const value = parseInt(input.value);
+              if (value >= 0 || value <= 100) {
+                axios.post(`${apiBaseUrl}/level/3`, { value });
+              }
+            }}
+          >
+            Save
+          </Button>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };
