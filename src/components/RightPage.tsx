@@ -47,7 +47,7 @@ const RightPage: React.FC = () => {
         <span>
           Depth :{" "}
           <span className={depthStatus === "checked" ? "text-safezone" : "text-destructive"}>
-            <Badge variant={depthStatus === "checked" ? "default" : "destructive"}>{depthStatus === "checked" ? depth : depthStatus}</Badge>
+            <Badge variant={depthStatus === "checked" ? "default" : "destructive"}>{depthStatus === "checked" ? `${depth} cm` : depthStatus}</Badge>
           </span>
         </span>
         <Button
