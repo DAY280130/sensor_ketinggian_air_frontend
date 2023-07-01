@@ -96,7 +96,6 @@ const RightPage: React.FC = () => {
           {sonarButtonIsLoading ? <Loader2 className="h-4 w-4 animate-spin" /> : sonarStatus === "active" ? "Deactivate" : "Activate"}
         </Button>
       </span>
-      {/* <span className="w-full gap-3 rounded-md bg-accent px-3 py-2 font-semibold"></span> */}
       <Tabs defaultValue="level1" className="w-full">
         <TabsList className="mb-2 flex w-full rounded-md bg-accent px-3 py-2">
           <TabsTrigger value="level1" className="grow">
@@ -110,12 +109,13 @@ const RightPage: React.FC = () => {
           </TabsTrigger>
         </TabsList>
         <TabsContent value="level1" className="m-0 flex w-full flex-col items-start gap-3 rounded-md bg-accent font-semibold data-[state=active]:px-3 data-[state=active]:py-2">
-          <Label htmlFor="level-1-input" className="text-right">
+          <Label htmlFor="level-1-input" className="text-right text-base">
             Safe Water Level Percentage
           </Label>
           <Input id="level-1-input" type="number" min={0} max={100} placeholder={level1Breakpoint.toString()} />
           <Button
             type="button"
+            className="w-full"
             onClick={() => {
               const input = document.getElementById("level-1-input") as HTMLInputElement;
               const value = parseInt(input.value);
@@ -128,12 +128,13 @@ const RightPage: React.FC = () => {
           </Button>
         </TabsContent>
         <TabsContent value="level2" className="m-0 flex w-full flex-col items-start gap-3 rounded-md bg-accent font-semibold data-[state=active]:px-3 data-[state=active]:py-2">
-          <Label htmlFor="level-2-input" className="text-right">
+          <Label htmlFor="level-2-input" className="text-right text-base">
             Be Warned Water Level Percentage
           </Label>
           <Input id="level-2-input" type="number" min={0} max={100} placeholder={level2Breakpoint.toString()} />
           <Button
             type="button"
+            className="w-full"
             onClick={() => {
               const input = document.getElementById("level-2-input") as HTMLInputElement;
               const value = parseInt(input.value);
@@ -146,12 +147,13 @@ const RightPage: React.FC = () => {
           </Button>
         </TabsContent>
         <TabsContent value="level3" className="m-0 flex w-full flex-col items-start gap-3 rounded-md bg-accent font-semibold data-[state=active]:px-3 data-[state=active]:py-2">
-          <Label htmlFor="level-3-input" className="text-right">
+          <Label htmlFor="level-3-input" className="text-right text-base">
             Dangerous Water Level Percentage
           </Label>
           <Input id="level-3-input" type="number" min={0} max={100} placeholder={level3Breakpoint.toString()} />
           <Button
             type="button"
+            className="w-full"
             onClick={() => {
               const input = document.getElementById("level-3-input") as HTMLInputElement;
               const value = parseInt(input.value);

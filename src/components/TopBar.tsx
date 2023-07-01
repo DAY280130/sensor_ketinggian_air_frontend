@@ -44,6 +44,7 @@ const TopBar: React.FC = () => {
             <DialogFooter>
               <Button
                 type="button"
+                className="w-full"
                 onClick={() => {
                   const input = document.getElementById("api-url-input") as HTMLInputElement;
                   setApiBaseUrl(input.value);
