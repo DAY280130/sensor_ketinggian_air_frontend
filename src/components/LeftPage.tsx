@@ -20,7 +20,7 @@ type LevelBreakpoints = z.infer<typeof levelBreakpointSchema>;
 
 const LeftPage: React.FC = () => {
   const apiBaseUrl = useReadLocalStorage<string>("api-url");
-  const { data } = useQuery({
+  const { data } = useQuery<WaterMonitorDatas & LevelBreakpoints>({
     queryKey: ["left-page"],
     queryFn: async () => {
       const waterMonitorDatas = (await axios.get<WaterMonitorDatas>(`${apiBaseUrl}/water`)).data;
