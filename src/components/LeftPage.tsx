@@ -23,9 +23,9 @@ const LeftPage: React.FC = () => {
   const { data } = useQuery({
     queryKey: ["left-page"],
     queryFn: async () => {
-      const waterMonitorDatas = await (await axios.get<WaterMonitorDatas>(`${apiBaseUrl}/water`)).data;
+      const waterMonitorDatas = (await axios.get<WaterMonitorDatas>(`${apiBaseUrl}/water`)).data;
 
-      const levelBreakpoints = await (await axios.get<LevelBreakpoints>(`${apiBaseUrl}/level`)).data;
+      const levelBreakpoints = (await axios.get<LevelBreakpoints>(`${apiBaseUrl}/level`)).data;
 
       return {
         waterLevel: waterMonitorDatas.waterLevel,
