@@ -48,7 +48,7 @@ const LeftPage: React.FC = () => {
   return (
     <div className="relative flex h-[75vh] w-[75vw] flex-col justify-end rounded-b-xl border-4 border-foreground border-t-transparent md:w-[30vw]">
       <svg
-        className={`relative w-full transition-all duration-1000 ${waterLevel <= 5 && "rounded-b-lg"}`}
+        className={cn("relative w-full transition-all duration-500", waterLevel <= 5 && "rounded-b-lg")}
         style={{ height: `${waterStatus === "unchecked" ? 0 : waterLevel <= 5 ? waterLevel : 5}%` }}
         xmlns="http://www.w3.org/2000/svg"
         xmlnsXlink="http://www.w3.org/1999/xlink"
@@ -67,36 +67,36 @@ const LeftPage: React.FC = () => {
         </g>
       </svg>
       <div
-        className="-mt-[0.1px] w-full rounded-b-lg bg-blue-300 transition-all duration-500"
+        className="w-full rounded-b-lg bg-blue-300 transition-all duration-500"
         style={{ height: `${waterStatus === "unchecked" ? 0 : waterLevel >= 5 ? waterLevel - 5.0 : 0.0}%` }}
       ></div>
-      <div className="absolute left-0 flex h-1 w-[125%] items-center transition-all duration-700" style={{ bottom: `${level3Breakpoint}%` }}>
-        <hr className="h-1 w-[80%] bg-destructive" />
+      <div className="absolute left-0 flex h-1 w-full items-center transition-all duration-700 md:w-[125%]" style={{ bottom: `${level3Breakpoint}%` }}>
+        <hr className="h-1 w-4/5 bg-destructive" />
         <span
           className={cn(
-            "rounded-md border-2 border-destructive px-3 py-2",
+            "w-1/5 rounded-md border-2 border-destructive px-3 py-2 text-center",
             waterStatus === "dangerous" ? "z-10 bg-destructive font-bold text-destructive-foreground" : "bg-destructive-foreground font-semibold text-destructive"
           )}
         >
           {level3Breakpoint}%
         </span>
       </div>
-      <div className="absolute left-0 flex h-1 w-[125%] items-center transition-all duration-700" style={{ bottom: `${level2Breakpoint}%` }}>
-        <hr className="h-1 w-[80%] bg-warning" />
+      <div className="absolute left-0 flex h-1 w-full items-center transition-all duration-700 md:w-[125%]" style={{ bottom: `${level2Breakpoint}%` }}>
+        <hr className="h-1 w-4/5 bg-warning" />
         <span
           className={cn(
-            "rounded-md border-2 border-warning px-3 py-2",
+            "w-1/5 rounded-md border-2 border-warning px-3 py-2 text-center",
             waterStatus === "be warned" ? "z-10 bg-warning font-bold text-warning-foreground" : "bg-warning-foreground font-semibold text-warning"
           )}
         >
           {level2Breakpoint}%
         </span>
       </div>
-      <div className="absolute left-0 flex h-1 w-[125%] items-center transition-all duration-700" style={{ bottom: `${level1Breakpoint}%` }}>
-        <hr className="h-1 w-[80%] bg-safezone" />
+      <div className="absolute left-0 flex h-1 w-full items-center transition-all duration-700 md:w-[125%]" style={{ bottom: `${level1Breakpoint}%` }}>
+        <hr className="h-1 w-4/5 bg-safezone" />
         <span
           className={cn(
-            "rounded-md border-2 border-safezone px-3 py-2",
+            "w-1/5 rounded-md border-2 border-safezone px-3 py-2 text-center",
             waterStatus === "safe" ? "z-10 bg-safezone font-bold text-safezone-foreground" : "bg-safezone-foreground font-semibold text-safezone"
           )}
         >

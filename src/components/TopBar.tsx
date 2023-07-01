@@ -22,7 +22,7 @@ const TopBar: React.FC = () => {
 
   return (
     <div className="flex justify-between bg-primary px-5 py-3 text-primary-foreground">
-      <span className="text-3xl font-bold ">Water Level Sensor</span>
+      <span className="text-lg font-bold md:text-3xl ">Water Level Sensor</span>
       <span className="flex gap-2">
         <Dialog open={dialogOpen} onOpenChange={setDialogOpen}>
           <DialogTrigger asChild>
