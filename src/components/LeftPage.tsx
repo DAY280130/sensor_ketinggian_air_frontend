@@ -28,11 +28,8 @@ const LeftPage: React.FC = () => {
       const levelBreakpoints = (await axios.get<LevelBreakpoints>(`${apiBaseUrl}/level`)).data;
 
       return {
-        waterLevel: waterMonitorDatas.waterLevel,
-        waterStatus: waterMonitorDatas.waterStatus,
-        level1Breakpoint: levelBreakpoints.level1Breakpoint,
-        level2Breakpoint: levelBreakpoints.level2Breakpoint,
-        level3Breakpoint: levelBreakpoints.level3Breakpoint,
+        ...waterMonitorDatas,
+        ...levelBreakpoints,
       };
     },
     initialData: {
