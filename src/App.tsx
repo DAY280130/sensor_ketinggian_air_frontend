@@ -1,4 +1,5 @@
 import LeftPage from "@/components/LeftPage";
+import RightPage from "@/components/RightPage";
 import TopBar from "@/components/TopBar";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
@@ -11,7 +12,7 @@ function App() {
         <TopBar />
         <div className="flex w-full flex-col justify-start px-10 pt-10 md:flex-row md:justify-around">
           <LeftPage />
-          <span>test</span>
+          <RightPage />
         </div>
       </main>
     </QueryClientProvider>
