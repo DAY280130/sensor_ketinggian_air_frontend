@@ -36,7 +36,7 @@ const TopBar: React.FC = () => {
               <DialogDescription>Enter the Microcontroller's IP Address here to start control the water level sensor</DialogDescription>
             </DialogHeader>
             <div className="flex items-center gap-4">
-              <Label htmlFor="name" className="text-right">
+              <Label htmlFor="api-url-input" className="text-right">
                 IP
               </Label>
               <Input id="api-url-input" placeholder="http://1.1.1.1:80" defaultValue={apiBaseUrl} />
