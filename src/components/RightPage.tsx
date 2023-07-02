@@ -112,7 +112,7 @@ const RightPage: React.FC = () => {
           <Label htmlFor="level-1-input" className="text-right text-base">
             Safe Water Level Percentage
           </Label>
-          <Input id="level-1-input" type="number" min={0} max={100} placeholder={level1Breakpoint.toString()} />
+          <Input id="level-1-input" type="number" min={0} max={100} placeholder={level1Breakpoint?.toString() ?? ""} />
           <Button
             type="button"
             className="w-full"
@@ -131,7 +131,7 @@ const RightPage: React.FC = () => {
           <Label htmlFor="level-2-input" className="text-right text-base">
             Be Warned Water Level Percentage
           </Label>
-          <Input id="level-2-input" type="number" min={0} max={100} placeholder={level2Breakpoint.toString()} />
+          <Input id="level-2-input" type="number" min={0} max={100} placeholder={level2Breakpoint?.toString() ?? ""} />
           <Button
             type="button"
             className="w-full"
@@ -150,7 +150,7 @@ const RightPage: React.FC = () => {
           <Label htmlFor="level-3-input" className="text-right text-base">
             Dangerous Water Level Percentage
           </Label>
-          <Input id="level-3-input" type="number" min={0} max={100} placeholder={level3Breakpoint.toString()} />
+          <Input id="level-3-input" type="number" min={0} max={100} placeholder={level3Breakpoint?.toString() ?? ""} />
           <Button
             type="button"
             className="w-full"
